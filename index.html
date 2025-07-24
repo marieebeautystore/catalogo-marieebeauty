@@ -66,7 +66,7 @@
         <!-- Logo da loja -->
         <!-- IMPORTANTE: SUBSTITUA 'seu_logo.png' PELO NOME REAL DO SEU ARQUIVO DE LOGO. -->
         <!-- Certifique-se de que o arquivo 'seu_logo.png' está na pasta 'imagens' do seu repositório GitHub. -->
-        <img src="./imagens/seu_logo.png" alt="Logo Mariée Beauty" class="mx-auto mb-4 rounded-lg h-24">
+        <img src="./imagens/seu_logo.png" alt="Logo Mariée Beauty" class="mx-auto mb-4 rounded-lg w-32 h-32 object-contain">
         <h1 class="text-4xl font-extrabold tracking-tight">Mariée Beauty</h1>
         <p class="mt-2 text-lg opacity-90">Beleza que inspira, produtos que encantam!</p>
     </header>
@@ -197,7 +197,7 @@
         let cart = {};
 
         // Seu número de WhatsApp com o código do país e DDD (ex: 5511987654321)
-        // IMPORTANTE: Substitua '5511987654321' pelo número real da sua namorada.
+        // IMPORTANTE: Substitua '5511949249158' pelo número real da sua namorada.
         const whatsappNumber = '5511949249158'; // Exemplo: 55 (Brasil) 11 (DDD SP) 987654321 (número)
 
         // Elementos DOM
@@ -425,11 +425,9 @@
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedOrderText}`;
 
             console.log('WhatsApp URL generated:', whatsappUrl); // Debug log: mostra a URL gerada
-            whatsappMessage.classList.remove('hidden'); // Mostra a mensagem de redirecionamento
-            setTimeout(() => {
-                window.open(whatsappUrl, '_blank'); // Abre o WhatsApp em uma nova aba
-                closeModal(); // Fecha o modal após abrir o WhatsApp
-            }, 1000); // Dá um pequeno atraso para a mensagem ser vista
+            // Removido o setTimeout para garantir que window.open seja direto do clique
+            window.open(whatsappUrl, '_blank'); // Abre o WhatsApp em uma nova aba
+            closeModal(); // Fecha o modal após abrir o WhatsApp
         });
 
         // Fecha o modal de pedido se clicar fora dele
