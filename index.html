@@ -67,7 +67,7 @@
         <!-- IMPORTANTE: SUBSTITUA 'seu_logo.png' PELO NOME REAL DO SEU ARQUIVO DE LOGO. -->
         <!-- Certifique-se de que o arquivo 'seu_logo.png' está na pasta 'imagens' do seu repositório GitHub. -->
         <img src="./imagens/logo.jpeg" alt="Logo Mariée Beauty" class="mx-auto mb-4 rounded-lg w-32 h-32 object-contain">
-        <!-- <h1 class="text-4xl font-extrabold tracking-tight">Mariée Beauty</h1> -->
+        <h1 class="text-4xl font-extrabold tracking-tight">Mariée Beauty</h1>
         <p class="mt-2 text-lg opacity-90">Beleza que inspira, produtos que encantam!</p>
     </header>
 
@@ -105,6 +105,12 @@
                 <div>
                     <label for="endereco" class="block text-sm font-medium text-gray-700 mb-1">Endereço completo:</label>
                     <input type="text" id="endereco" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Ex: Rua Exemplo, 123 - Apto 101, Bairro - Cidade, Estado">
+                </div>
+                <div>
+                    <label for="cep" class="block text-sm font-medium text-gray-700 mb-1">CEP:</label>
+                    <input type="text" id="cep" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Ex: 00000-000">
+                    <p id="frete-info" class="text-sm text-gray-600 mt-1"></p>
+                    <p id="previsao-entrega" class="text-sm text-gray-600 mt-1"></p>
                 </div>
                 <div>
                     <label for="forma-pagamento" class="block text-sm font-medium text-gray-700 mb-1">Forma de Pagamento:</label>
@@ -195,10 +201,21 @@
 
         // Objeto para armazenar os itens do carrinho
         let cart = {};
+        let shippingCost = 0; // Variável para armazenar o custo do frete
+        let deliveryEstimate = ""; // Variável para armazenar a previsão de entrega
 
         // Seu número de WhatsApp com o código do país e DDD (ex: 5511987654321)
         // IMPORTANTE: Substitua '5511949249158' pelo número real da sua namorada.
         const whatsappNumber = '5511949249158'; // Exemplo: 55 (Brasil) 11 (DDD SP) 987654321 (número)
+
+        // Prefixes de CEPs que terão frete grátis
+        const freeShippingCEPPrefixes = [
+            '034', // Exemplo: CEPs que começam com 034
+            '035', // Exemplo: CEPs que começam com 035
+            '036', // Exemplo: CEPs que começam com 036
+            // Adicione mais prefixos aqui conforme necessário
+        ];
+
 
         // Elementos DOM
         const productListDiv = document.getElementById('product-list');
@@ -211,15 +228,16 @@
         const sendWhatsappBtn = document.getElementById('send-whatsapp-btn');
         const whatsappMessage = document.getElementById('whatsapp-message');
 
-        // Novas referências para o carrinho móvel
         const floatingCartBtn = document.getElementById('floating-cart-btn');
         const floatingCartCount = document.getElementById('floating-cart-count');
         const cartAside = document.getElementById('cart-aside');
         const closeCartBtn = document.getElementById('close-cart-btn');
         const cartBackdrop = document.getElementById('cart-backdrop');
 
-        // Referências para os novos campos de input
         const enderecoInput = document.getElementById('endereco');
+        const cepInput = document.getElementById('cep'); // Referência para o novo campo de CEP
+        const freteInfo = document.getElementById('frete-info'); // Para exibir o custo do frete
+        const previsaoEntrega = document.getElementById('previsao-entrega'); // Para exibir a previsão de entrega
         const formaPagamentoSelect = document.getElementById('forma-pagamento');
 
 
@@ -278,25 +296,65 @@
             }
         }
 
+        // Função para calcular o frete e previsão de entrega
+        function calculateShipping() {
+            const cepValue = cepInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            
+            let isFreeShipping = false;
+            if (cepValue.length >= 3) { // Verifica se tem pelo menos 3 dígitos para comparar prefixos
+                for (const prefix of freeShippingCEPPrefixes) {
+                    if (cepValue.startsWith(prefix)) {
+                        isFreeShipping = true;
+                        break;
+                    }
+                }
+            }
+
+            if (cepValue.length === 8) { // Só calcula frete e previsão se o CEP estiver completo
+                if (isFreeShipping) {
+                    shippingCost = 0;
+                    deliveryEstimate = "1-2 dias úteis";
+                    freteInfo.textContent = "Frete: GRÁTIS";
+                    freteInfo.classList.remove('text-red-500');
+                    freteInfo.classList.add('text-green-600');
+                } else {
+                    shippingCost = 5.00;
+                    deliveryEstimate = "3-5 dias úteis";
+                    freteInfo.textContent = `Frete: ${formatPrice(shippingCost)}`;
+                    freteInfo.classList.remove('text-green-600');
+                    freteInfo.classList.add('text-red-500');
+                }
+                previsaoEntrega.textContent = `Previsão de entrega: ${deliveryEstimate}`;
+            } else {
+                shippingCost = 0; // Ou um valor padrão se o CEP for inválido/incompleto
+                deliveryEstimate = "";
+                freteInfo.textContent = "Digite um CEP válido para calcular o frete.";
+                freteInfo.classList.remove('text-green-600', 'text-red-500');
+                previsaoEntrega.textContent = "";
+            }
+            updateCartDisplay(); // Atualiza o total com o novo frete
+        }
+
+
         // Função para atualizar a exibição do carrinho
         function updateCartDisplay() {
             cartItemsDiv.innerHTML = ''; // Limpa os itens existentes
-            let total = 0;
-            let totalItemsInCart = 0; // Para o contador do botão flutuante
+            let subtotal = 0; // Usar subtotal antes do frete
+            let totalItemsInCart = 0;
             const cartItemCount = Object.keys(cart).length;
 
             if (cartItemCount === 0) {
                 emptyCartMessage.classList.remove('hidden');
-                if (floatingCartCount) floatingCartCount.classList.add('hidden'); // Esconde o contador se o carrinho estiver vazio
+                if (floatingCartCount) floatingCartCount.classList.add('hidden');
             } else {
                 emptyCartMessage.classList.add('hidden');
-                if (floatingCartCount) floatingCartCount.classList.remove('hidden'); // Mostra o contador se houver itens
+                if (floatingCartCount) floatingCartCount.classList.remove('hidden');
             }
 
             for (const productId in cart) {
                 const item = cart[productId];
-                total += item.price * item.quantity;
-                totalItemsInCart += item.quantity; // Soma todas as quantidades
+                subtotal += item.price * item.quantity;
+                totalItemsInCart += item.quantity;
 
                 const cartItemDiv = document.createElement('div');
                 cartItemDiv.className = 'flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-200';
@@ -314,8 +372,9 @@
                 cartItemsDiv.appendChild(cartItemDiv);
             }
 
-            cartTotalSpan.textContent = formatPrice(total);
-            if (floatingCartCount) floatingCartCount.textContent = totalItemsInCart; // Atualiza o contador do ícone flutuante
+            // O total agora inclui o frete
+            cartTotalSpan.textContent = formatPrice(subtotal + shippingCost);
+            if (floatingCartCount) floatingCartCount.textContent = totalItemsInCart;
 
             // Adiciona event listeners aos botões de +/- no carrinho
             document.querySelectorAll('.remove-item-btn').forEach(button => {
@@ -335,19 +394,22 @@
         // Função para gerar o resumo do pedido
         function generateOrderSummary() {
             let summary = `Olá! Gostaria de fazer o seguinte pedido:\n\n`;
-            let total = 0;
+            let subtotal = 0;
+            let totalComFrete = 0;
+
 
             // Captura os valores dos novos campos
             const endereco = enderecoInput.value.trim();
+            const cep = cepInput.value.trim(); // Captura o CEP
             const formaPagamento = formaPagamentoSelect.value;
 
-            // Validação simples dos campos obrigatórios
+            // Validação dos campos obrigatórios
             if (Object.keys(cart).length === 0) {
                 summary = "Seu carrinho está vazio. Por favor, adicione produtos antes de gerar o pedido.";
                 sendWhatsappBtn.disabled = true;
                 sendWhatsappBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            } else if (!endereco || !formaPagamento) {
-                summary = "Por favor, preencha o Endereço completo e selecione a Forma de Pagamento para finalizar o pedido.";
+            } else if (!endereco || !cep || !formaPagamento || shippingCost === null) { // Adicionado validação para CEP e shippingCost
+                summary = "Por favor, preencha o Endereço completo, CEP e selecione a Forma de Pagamento para finalizar o pedido.";
                 sendWhatsappBtn.disabled = true;
                 sendWhatsappBtn.classList.add('opacity-50', 'cursor-not-allowed');
             }
@@ -358,13 +420,20 @@
                 for (const productId in cart) {
                     const item = cart[productId];
                     summary += `- ${item.name} (x${item.quantity}) - ${formatPrice(item.price * item.quantity)}\n`;
-                    total += item.price * item.quantity;
+                    subtotal += item.price * item.quantity;
                 }
-                summary += `\nTotal: ${formatPrice(total)}\n\n`;
+                
+                totalComFrete = subtotal + shippingCost; // Calcula o total com frete
+
+                summary += `\nSubtotal: ${formatPrice(subtotal)}\n`;
+                summary += `Frete: ${shippingCost === 0 ? 'GRÁTIS' : formatPrice(shippingCost)}\n`;
+                summary += `Total: ${formatPrice(totalComFrete)}\n\n`;
 
                 // Adiciona as informações de endereço e pagamento ao resumo
                 summary += `--- Detalhes da Entrega e Pagamento ---\n`;
                 summary += `Endereço: ${endereco}\n`;
+                summary += `CEP: ${cep}\n`; // Inclui o CEP no resumo
+                summary += `Previsão de Entrega: ${deliveryEstimate}\n`; // Inclui a previsão de entrega
                 summary += `Forma de Pagamento: ${formaPagamento}\n\n`;
                 summary += `Aguardamos seu contato para finalizar a compra!`;
             }
@@ -376,7 +445,7 @@
         // Funções para o modal de pedido
         function openModal() {
             orderModal.style.display = 'flex';
-            whatsappMessage.classList.add('hidden'); // Usa whatsappMessage
+            whatsappMessage.classList.add('hidden');
         }
 
         function closeModal() {
@@ -385,28 +454,21 @@
 
         // Funções para o carrinho móvel (overlay)
         function openMobileCart() {
-            console.log('openMobileCart function called.'); // Debug log
             if (cartAside) {
-                cartAside.classList.remove('hidden'); // Torna o carrinho visível
-                cartAside.classList.add('is-open'); // Ativa a animação de deslize
-            } else {
-                console.error('cartAside element not found!');
+                cartAside.classList.remove('hidden');
+                cartAside.classList.add('is-open');
             }
             if (cartBackdrop) {
-                cartBackdrop.classList.remove('hidden'); // Mostra o fundo escuro
-            } else {
-                console.error('cartBackdrop element not found!');
+                cartBackdrop.classList.remove('hidden');
             }
         }
 
         function closeMobileCart() {
-            console.log('closeMobileCart function called.'); // Debug log
             if (cartAside) {
-                cartAside.classList.remove('is-open'); // Ativa a animação de deslize para fora
-                // Esconde após a transição
+                cartAside.classList.remove('is-open');
                 setTimeout(() => {
                     cartAside.classList.add('hidden');
-                }, 300); // Corresponde à duração da transição CSS
+                }, 300);
             }
             if (cartBackdrop) {
                 cartBackdrop.classList.add('hidden');
@@ -420,14 +482,11 @@
         // Event listener para o botão "Enviar Pedido via WhatsApp"
         sendWhatsappBtn.addEventListener('click', () => {
             const orderText = orderSummaryTextarea.value;
-            // Codifica o texto para URL para lidar com espaços e caracteres especiais
             const encodedOrderText = encodeURIComponent(orderText);
             const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedOrderText}`;
 
-            console.log('WhatsApp URL generated:', whatsappUrl); // Debug log: mostra a URL gerada
-            // Removido o setTimeout para garantir que window.open seja direto do clique
-            window.open(whatsappUrl, '_blank'); // Abre o WhatsApp em uma nova aba
-            closeModal(); // Fecha o modal após abrir o WhatsApp
+            window.open(whatsappUrl, '_blank');
+            closeModal();
         });
 
         // Fecha o modal de pedido se clicar fora dele
@@ -435,37 +494,27 @@
             if (event.target === orderModal) {
                 closeModal();
             }
-            // Fecha o carrinho móvel se clicar no backdrop
             if (event.target === cartBackdrop) {
                 closeMobileCart();
             }
         });
 
+        // Event listener para o campo de CEP para calcular o frete dinamicamente
+        cepInput.addEventListener('input', calculateShipping);
+
+
         // Inicializa a aplicação
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM Content Loaded.'); // Debug log
             renderProducts();
+            calculateShipping(); // Calcula o frete inicial ao carregar a página
             updateCartDisplay();
-
-            // Debugging floating cart button
+            
+            // Debugging floating cart button (mantido para caso de problemas futuros)
             if (floatingCartBtn) {
-                console.log('Floating cart button found:', floatingCartBtn);
-                floatingCartBtn.addEventListener('click', () => {
-                    console.log('Floating cart button clicked!'); // Debug log
-                    openMobileCart();
-                });
-            } else {
-                console.error('Floating cart button not found!');
+                floatingCartBtn.addEventListener('click', openMobileCart);
             }
-
             if (closeCartBtn) {
-                console.log('Close cart button found:', closeCartBtn);
-                closeCartBtn.addEventListener('click', () => {
-                    console.log('Close cart button clicked!'); // Debug log
-                    closeMobileCart();
-                });
-            } else {
-                console.error('Close cart button not found!');
+                closeCartBtn.addEventListener('click', closeMobileCart);
             }
         });
     </script>
