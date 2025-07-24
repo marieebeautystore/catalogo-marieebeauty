@@ -67,7 +67,6 @@
         <!-- IMPORTANTE: SUBSTITUA 'seu_logo.png' PELO NOME REAL DO SEU ARQUIVO DE LOGO. -->
         <!-- Certifique-se de que o arquivo 'seu_logo.png' está na pasta 'imagens' do seu repositório GitHub. -->
         <img src="./imagens/logo.jpeg" alt="Logo Mariée Beauty" class="mx-auto mb-4 rounded-lg w-32 h-32 object-contain">
-        <h1 class="text-4xl font-extrabold tracking-tight">Mariée Beauty</h1>
         <p class="mt-2 text-lg opacity-90">Beleza que inspira, produtos que encantam!</p>
     </header>
 
@@ -101,20 +100,17 @@
             </div>
             
             <!-- Novos campos para finalização do pedido -->
-            <div class="mt-6 pt-4 border-t-2 border-gray-200 space-y-4">
-                <div>
-                    <label for="endereco" class="block text-sm font-medium text-gray-700 mb-1">Endereço completo:</label>
-                    <input type="text" id="endereco" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Ex: Rua Exemplo, 123 - Apto 101, Bairro - Cidade, Estado">
-                </div>
+            <div class="mt-6 pt-4 border-t-2 border-gray-200 space-y-2">
+                <!-- Alterado space-y-4 para space-y-2 -->
                 <div>
                     <label for="cep" class="block text-sm font-medium text-gray-700 mb-1">CEP:</label>
-                    <input type="text" id="cep" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Ex: 00000-000">
+                    <input type="text" id="cep" class="w-full max-w-xs p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400" placeholder="Ex: 00000-000">
                     <p id="frete-info" class="text-sm text-gray-600 mt-1"></p>
                     <p id="previsao-entrega" class="text-sm text-gray-600 mt-1"></p>
                 </div>
                 <div>
                     <label for="forma-pagamento" class="block text-sm font-medium text-gray-700 mb-1">Forma de Pagamento:</label>
-                    <select id="forma-pagamento" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400">
+                    <select id="forma-pagamento" class="w-full max-w-xs p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-400">
                         <option value="">Selecione uma opção</option>
                         <option value="Pix">Pix</option>
                         <option value="Cartão de Crédito">Cartão de Crédito</option>
@@ -234,10 +230,10 @@
         const closeCartBtn = document.getElementById('close-cart-btn');
         const cartBackdrop = document.getElementById('cart-backdrop');
 
-        const enderecoInput = document.getElementById('endereco');
-        const cepInput = document.getElementById('cep'); // Referência para o novo campo de CEP
-        const freteInfo = document.getElementById('frete-info'); // Para exibir o custo do frete
-        const previsaoEntrega = document.getElementById('previsao-entrega'); // Para exibir a previsão de entrega
+        // Referências para os novos campos de input
+        const cepInput = document.getElementById('cep');
+        const freteInfo = document.getElementById('frete-info');
+        const previsaoEntrega = document.getElementById('previsao-entrega');
         const formaPagamentoSelect = document.getElementById('forma-pagamento');
 
 
@@ -318,7 +314,7 @@
                     freteInfo.classList.remove('text-red-500');
                     freteInfo.classList.add('text-green-600');
                 } else {
-                    shippingCost = 5.00;
+                    shippingCost = 5.90;
                     deliveryEstimate = "1-2 dias úteis";
                     freteInfo.textContent = `Frete: ${formatPrice(shippingCost)}`;
                     freteInfo.classList.remove('text-green-600');
@@ -399,7 +395,6 @@
 
 
             // Captura os valores dos novos campos
-            const endereco = enderecoInput.value.trim();
             const cep = cepInput.value.trim(); // Captura o CEP
             const formaPagamento = formaPagamentoSelect.value;
 
@@ -408,8 +403,8 @@
                 summary = "Seu carrinho está vazio. Por favor, adicione produtos antes de gerar o pedido.";
                 sendWhatsappBtn.disabled = true;
                 sendWhatsappBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            } else if (!endereco || !cep || !formaPagamento || shippingCost === null) { // Adicionado validação para CEP e shippingCost
-                summary = "Por favor, preencha o Endereço completo, CEP e selecione a Forma de Pagamento para finalizar o pedido.";
+            } else if (!cep || !formaPagamento || shippingCost === null) { // Validação ajustada
+                summary = "Por favor, preencha o CEP e selecione a Forma de Pagamento para finalizar o pedido.";
                 sendWhatsappBtn.disabled = true;
                 sendWhatsappBtn.classList.add('opacity-50', 'cursor-not-allowed');
             }
@@ -431,7 +426,6 @@
 
                 // Adiciona as informações de endereço e pagamento ao resumo
                 summary += `--- Detalhes da Entrega e Pagamento ---\n`;
-                summary += `Endereço: ${endereco}\n`;
                 summary += `CEP: ${cep}\n`; // Inclui o CEP no resumo
                 summary += `Previsão de Entrega: ${deliveryEstimate}\n`; // Inclui a previsão de entrega
                 summary += `Forma de Pagamento: ${formaPagamento}\n\n`;
