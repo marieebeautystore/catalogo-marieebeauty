@@ -235,7 +235,6 @@
         const freteInfo = document.getElementById('frete-info');
         const previsaoEntrega = document.getElementById('previsao-entrega');
         const formaPagamentoSelect = document.getElementById('forma-pagamento');
-        const horario = document.getElementById('horario');
 
 
         // Função para formatar o preço em BRL
@@ -329,8 +328,7 @@
                 if (isFreeShipping) {
                     shippingCost = 0;
                     deliveryEstimate = "1-2 dias úteis";
-                    freteInfo.textContent = "Frete: GRÁTIS";
-                    document.getElementById('horario').textContent = "Entrega será realizada à partir das 18:00";
+                    freteInfo.textContent = "Frete: GRÁTIS, realizado à partir das 18:00";
                     freteInfo.classList.remove('text-red-500');
                     freteInfo.classList.add('text-green-600');
                 } else {
