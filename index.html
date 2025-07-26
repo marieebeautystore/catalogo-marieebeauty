@@ -157,8 +157,9 @@
         // Array de produtos (você pode adicionar mais aqui!)
         const products = [
             // Adicione a propriedade 'available: true/false' a cada produto
-            { id: 1, name: "Esponja (Sortida)", price: 4, image: "./imagens/esponja.png", available: true },
-            { id: 2, name: "Kit 3 Esponja Alleva", price: 10, image: "./imagens/kit_esponja_alleva.png", available: false },
+            // Adicione a propriedade 'promoPrice: valor' para produtos em promoção
+            { id: 1, name: "Esponja (Sortida)", price: 4, image: "./imagens/esponja.png", available: true, promoPrice: 3.00 },
+            { id: 2, name: "Kit 3 Esponja Alleva", price: 10, image: "./imagens/kit_esponja_alleva.png", available: false, promoPrice: 8.50 },
             { id: 3, name: "Batom 24Horas", price: 4.5, image: "./imagens/batom_24h.png", available: true },
             { id: 4, name: "Serum Vitamina C", price: 10, image: "./imagens/serum_vit_c.png", available: true },
             { id: 5, name: "Serum Anti-Oleosidade", price: 10, image: "./imagens/serum_anti_oleosidade.png", available: true },
@@ -183,7 +184,7 @@
             { id: 24, name: "Esfoliante Facial Vit C Dermachem", price: 16, image: "./imagens/esfoliante_facial_vit_c_dermachem.png", available: true },
             { id: 25, name: "Pó Banana Fenzza", price: 12, image: "./imagens/po_banana_fenzza.png", available: true },
             { id: 26, name: "Pó Translucido", price: 12, image: "./imagens/po_translucido.png", available: true },
-            { id: 27, name: "Paleta Blush", price: 17, image: "./imagens/paleta_blush.png", available: true },
+            { id: 27, name: "Paleta Blush", price: 17, image: "./imagens/paleta_blush.png", available: true, promoPrice: 15.00 },
             { id: 28, name: "Esfoliante Corporal Pitaya Poran", price: 14, image: "./imagens/esfoliante_corporal_pitaya_poran.png", available: true },
             { id: 29, name: "Esfoliante Corporal Melancia Poran", price: 14, image: "./imagens/esfoliante_corporal_melancia_poran.png", available: true },
             { id: 30, name: "Blush 3em1 Miss Lary", price: 16.90, image: "./imagens/Blush_3em1_miss_lary.png", available: true },
@@ -250,6 +251,7 @@
                 productCard.className = 'product-card bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center border border-gray-200 hover:border-pink-400';
                 
                 let buttonHtml = '';
+                // Lógica para exibir o botão ou "Indisponível"
                 if (product.available) {
                     buttonHtml = `
                         <button class="add-to-cart-btn bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-opacity-50" data-id="${product.id}">
@@ -264,10 +266,26 @@
                     `;
                 }
 
+                let priceHtml = '';
+                // Lógica para exibir preço promocional ou normal
+                if (product.promoPrice !== undefined && product.promoPrice < product.price) {
+                    priceHtml = `
+                        <p class="text-xl font-bold text-purple-600 mb-4">
+                            <s class="text-gray-500 text-sm mr-2">${formatPrice(product.price)}</s>
+                            ${formatPrice(product.promoPrice)}
+                        </p>
+                    `;
+                } else {
+                    priceHtml = `
+                        <p class="text-xl font-bold text-purple-600 mb-4">${formatPrice(product.price)}</p>
+                    `;
+                }
+
+
                 productCard.innerHTML = `
                     <img src="${product.image}" alt="${product.name}" class="w-32 h-32 object-cover rounded-full mb-4 border-2 border-pink-300">
                     <h3 class="text-lg font-semibold text-gray-800 mb-2">${product.name}</h3>
-                    <p class="text-xl font-bold text-purple-600 mb-4">${formatPrice(product.price)}</p>
+                    ${priceHtml}
                     ${buttonHtml}
                 `;
                 productListDiv.appendChild(productCard);
@@ -286,15 +304,17 @@
         function addToCart(productId) {
             const product = products.find(p => p.id === productId);
             if (product && product.available) { // Verifica se o produto está disponível
+                // Decide qual preço usar (promocional ou normal)
+                const priceToUse = product.promoPrice !== undefined && product.promoPrice < product.price ? product.promoPrice : product.price;
+
                 if (cart[productId]) {
                     cart[productId].quantity++;
                 } else {
-                    cart[productId] = { ...product, quantity: 1 };
+                    // Adiciona o produto ao carrinho com o preço correto (promocional se aplicável)
+                    cart[productId] = { ...product, price: priceToUse, quantity: 1 };
                 }
                 updateCartDisplay();
             } else if (product && !product.available) {
-                // Opcional: Mensagem para o usuário que o produto está indisponível
-                // alert(`O produto "${product.name}" está indisponível no momento.`); // Evitar alert()
                 console.log(`Tentativa de adicionar produto indisponível: ${product.name}`);
             }
         }
@@ -367,7 +387,8 @@
 
             for (const productId in cart) {
                 const item = cart[productId];
-                subtotal += item.price * item.quantity;
+                // Usa o preço que já foi definido no item do carrinho (que pode ser o promocional)
+                subtotal += item.price * item.quantity; 
                 totalItemsInCart += item.quantity;
 
                 const cartItemDiv = document.createElement('div');
@@ -432,6 +453,7 @@
 
                 for (const productId in cart) {
                     const item = cart[productId];
+                    // Usa o preço que já foi definido no item do carrinho (que pode ser o promocional)
                     summary += `- ${item.name} (x${item.quantity}) - ${formatPrice(item.price * item.quantity)}\n`;
                     subtotal += item.price * item.quantity;
                 }
@@ -439,7 +461,7 @@
                 totalComFrete = subtotal + shippingCost; // Calcula o total com frete
 
                 summary += `\nSubtotal: ${formatPrice(subtotal)}\n`;
-                summary += `Frete: ${shippingCost === 0 ? 'GRÁTIS' : formatPrice(shippingCost)}\n`;
+                summary += `Frete: ${shippingCost === 0 ? 'GRÁTIS, realizado à partir das 18:00' : formatPrice(shippingCost)}\n`;
                 summary += `Total: ${formatPrice(totalComFrete)}\n\n`;
 
                 // Adiciona as informações de endereço e pagamento ao resumo
