@@ -66,6 +66,7 @@
         <!-- Logo da loja -->
         <!-- IMPORTANTE: Certifique-se de que o arquivo 'logo.jpeg' está na pasta 'imagens' do seu repositório GitHub. -->
         <img src="./imagens/logo.jpeg" alt="Logo Mariée Beauty" class="mx-auto mb-4 rounded-lg w-32 h-32 object-contain">
+        <h1 class="text-4xl font-extrabold tracking-tight">Mariée Beauty</h1>
         <p class="mt-2 text-lg opacity-90">Beleza que inspira, produtos que encantam!</p>
     </header>
 
@@ -169,16 +170,19 @@
         </div>
     </div>
 
-    <script>promoPrice
-        // Array de produtos
+    <script>
+        // Array de produtos (você pode adicionar mais aqui!)
         const products = [
+            // Adicione a propriedade 'available: true/false' a cada produto
+            // Adicione a propriedade 'promoPercent: valor' para produtos em promoção (valor de 0 a 100)
+            // Adicione a propriedade 'launchDate: "YYYY-MM-DD"' para ordenação por lançamento
             { id: 1, name: "Esponja (Sortida)", price: 4, image: "./imagens/esponja.png", available: true, launchDate: "2024-07-01", promoPercent: 20 },
             { id: 2, name: "Kit 3 Esponja Alleva", price: 10, image: "./imagens/kit_esponja_alleva.png", available: false, launchDate: "2024-06-15", promoPercent: 20 },
-            { id: 3, name: "Batom 24Horas", price: 4.5, image: "./imagens/batom_24h.png", available: false, launchDate: "2024-07-20", promoPercent: 20 },
+            { id: 3, name: "Batom 24Horas", price: 4.5, image: "./imagens/batom_24h.png", available: true, launchDate: "2024-07-20", promoPercent: 20 },
             { id: 4, name: "Serum Vitamina C", price: 10, image: "./imagens/serum_vit_c.png", available: true, launchDate: "2024-05-10", promoPercent: 20 },
             { id: 5, name: "Serum Anti-Oleosidade", price: 10, image: "./imagens/serum_anti_oleosidade.png", available: true, launchDate: "2024-06-01", promoPercent: 20 },
             { id: 6, name: "Sérum Rosa Mosqueta", price: 10, image: "./imagens/serum_rosa_mosqueta.png", available: true, launchDate: "2024-07-05", promoPercent: 20 },
-            { id: 7, name: "Suporte p Pincel", price: 10, image: "./imagens/suporte_pincel.png", available: true, launchDate: "2024-04-20", promoPercent: 20 },
+            { id: 7, name: "Suporte p Pincel", price: 10, image: "./imagens/suporte_pincel.png", available: false, launchDate: "2024-04-20", promoPercent: 20 },
             { id: 8, name: "Pincel p Sobrancelha", price: 6, image: "./imagens/pincel_sobrancelha.png", available: true, launchDate: "2024-07-10", promoPercent: 20 },
             { id: 9, name: "Blush Bastão sarah beauty", price: 20, image: "./imagens/blush_bastao_sarah_beauty.png", available: true, launchDate: "2024-03-01", promoPercent: 20 },
             { id: 10, name: "Espelho p Bolsa", price: 15, image: "./imagens/espelho_bolsa.png", available: true, launchDate: "2024-07-18", promoPercent: 20 },
@@ -198,15 +202,15 @@
             { id: 24, name: "Esfoliante Facial Vit C Dermachem", price: 16, image: "./imagens/esfoliante_facial_vit_c_dermachem.png", available: true, launchDate: "2024-05-25", promoPercent: 20 },
             { id: 25, name: "Pó Banana Fenzza", price: 12, image: "./imagens/po_banana_fenzza.png", available: true, launchDate: "2024-07-07", promoPercent: 20 },
             { id: 26, name: "Pó Translucido", price: 12, image: "./imagens/po_translucido.png", available: true, launchDate: "2024-06-05", promoPercent: 20 },
-            { id: 27, name: "Paleta Blush", price: 17, image: "./imagens/paleta_blush.png", available: false, launchDate: "2024-07-21", promoPercent: 20 },
+            { id: 27, name: "Paleta Blush", price: 17, image: "./imagens/paleta_blush.png", available: true, launchDate: "2024-07-21", promoPercent: 20 },
             { id: 28, name: "Esfoliante Corporal Pitaya Poran", price: 14, image: "./imagens/esfoliante_corporal_pitaya_poran.png", available: true, launchDate: "2024-03-10", promoPercent: 20 },
             { id: 29, name: "Esfoliante Corporal Melancia Poran", price: 14, image: "./imagens/esfoliante_corporal_melancia_poran.png", available: true, launchDate: "2024-07-02", promoPercent: 20 },
             { id: 38, name: "Esfoliante Corporal Pêssego Poran", price: 14, image: "./imagens/esfoliante_corporal_pessego_poran.png", available: true, launchDate: "2024-07-25", promoPercent: 20 },
-            { id: 30, name: "Blush 3em1 Miss Lary", price: 16.90, image: "./imagens/Blush_3em1_miss_lary.png", available: false, launchDate: "2024-07-23", promoPercent: 20 },
+            { id: 30, name: "Blush 3em1 Miss Lary", price: 16.90, image: "./imagens/Blush_3em1_miss_lary.png", available: true, launchDate: "2024-07-23", promoPercent: 20 },
             { id: 31, name: "Primer Max Love", price: 12, image: "./imagens/primer_max_love.png", available: true, launchDate: "2024-04-15", promoPercent: 20 },
-            { id: 32, name: "Pó de Fada Mia Make", price: 14, image: "./imagens/po_fada_mia_make.png", available: false, launchDate: "2024-07-14", promoPercent: 20 },
+            { id: 32, name: "Pó de Fada Mia Make", price: 14, image: "./imagens/po_fada_mia_make.png", available: true, launchDate: "2024-07-14", promoPercent: 20 },
             { id: 33, name: "Máscara de cílios Bellafemme + Volume", price: 15, image: "./imagens/mascara_cilios_bellafemme.png", available: true, launchDate: "2024-07-24", promoPercent: 20 },
-            { id: 34, name: "Gloss c Glitter Lady Beauty", price: 10, image: "./imagens/gloss_glitter_lady_beauty.png", available: false, launchDate: "2024-07-17", promoPercent: 20 },
+            { id: 34, name: "Gloss c Glitter Lady Beauty", price: 10, image: "./imagens/gloss_glitter_lady_beauty.png", available: true, launchDate: "2024-07-17", promoPercent: 20 },
             { id: 35, name: "Gloss Vermelho Lady Beauty", price: 10, image: "./imagens/gloss_vermelho_lady_beauty.png", available: true, launchDate: "2024-07-11", promoPercent: 20 },
             { id: 36, name: "Mascara Facial Preta Max Love", price: 3, image: "./imagens/mascara_facial_preta_max_love.png", available: true, launchDate: "2024-05-01", promoPercent: 20 },
             { id: 37, name: "Sérum Facial Colágeno", price: 10, image: "./imagens/serum_facial_colageno.png", available: true, launchDate: "2024-07-26", promoPercent: 20 },
@@ -227,428 +231,406 @@
             { id: 53, name: "Gloss Lady Beauty Chocolate", price: 10, image: "./imagens/gloss_lady_chocolate.png", available: true, launchDate: "2025-08-21", promoPercent: 20 },
             { id: 54, name: "Gloss Miss Lary Mel", price: 12, image: "./imagens/gloss_miss_mel.png", available: true, launchDate: "2025-08-21", promoPercent: 20 },
             { id: 55, name: "Agua Micelar Ruby Rose c Colageno", price: 12, image: "./imagens/agua_micelar_colageno.png", available: true, launchDate: "2025-08-21", promoPercent: 20 },
-            { id: 56, name: "Geleia Corporal Bronze Dapop", price: 20, image: "./imagens/geleia_bronze_dapop.png", available: true, launchDate: "2025-08-21", promoPercent: 20  }
-        ];
+            { id: 56, name: "Geleia Corporal Bronze Dapop", price: 20, image: "./imagens/geleia_bronze_dapop.png", available: true, launchDate: "2025-08-21", promoPercent: 20  }
+        ];
 
-        // Objeto para armazenar os itens do carrinho
-        let cart = {};
-        let shippingCost = 0; // Variável para armazenar o custo do frete
-        let deliveryEstimate = ""; // Variável para armazenar a previsão de entrega
+        // Objeto para armazenar os itens do carrinho
+        let cart = {};
+        let shippingCost = 0; // Variável para armazenar o custo do frete
+        let deliveryEstimate = ""; // Variável para armazenar a previsão de entrega
 
-        // Seu número de WhatsApp com o código do país e DDD (ex: 5511987654321)
-        // IMPORTANTE: Substitua '5511949249158' pelo número real da sua namorada.
-        const whatsappNumber = '5511949249158'; // Exemplo: 55 (Brasil) 11 (DDD SP) 987654321 (número)
+        // Seu número de WhatsApp com o código do país e DDD (ex: 5511987654321)
+        // IMPORTANTE: Substitua '5511949249158' pelo número real da sua namorada.
+        const whatsappNumber = '5511949249158'; // Exemplo: 55 (Brasil) 11 (DDD SP) 987654321 (número)
 
-        // Prefixes de CEPs que terão frete grátis
-        const freeShippingCEPPrefixes = [
-            '034', // Exemplo: CEPs que começam com 034
-            '035', // Exemplo: CEPs que começam com 035
-            '036', // Exemplo: CEPs que começam com 036
-            // Adicione mais prefixos aqui conforme necessário
-        ];
-
-
-        // Elementos DOM
-        const productListDiv = document.getElementById('product-list');
-        const cartItemsDiv = document.getElementById('cart-items');
-        const cartTotalSpan = document.getElementById('cart-total');
-        const emptyCartMessage = document.getElementById('empty-cart-message');
-        const generateOrderBtn = document.getElementById('generate-order-btn');
-        const orderModal = document.getElementById('order-modal');
-        const orderSummaryTextarea = document.getElementById('order-summary-text');
-        const sendWhatsappBtn = document.getElementById('send-whatsapp-btn');
-        const whatsappMessage = document.getElementById('whatsapp-message');
-
-        const floatingCartBtn = document.getElementById('floating-cart-btn');
-        const floatingCartCount = document.getElementById('floating-cart-count');
-        const cartAside = document.getElementById('cart-aside');
-        const closeCartBtn = document.getElementById('close-cart-btn');
-        const cartBackdrop = document.getElementById('cart-backdrop');
-
-        // Referências para os novos campos de input
-        const cepInput = document.getElementById('cep');
-        const freteInfo = document.getElementById('frete-info');
-        const previsaoEntrega = document.getElementById('previsao-entrega');
-        const formaPagamentoSelect = document.getElementById('forma-pagamento');
-
-        // Referências para os novos controles de filtro e ordenação
-        const sortBySelect = document.getElementById('sort-by');
-        const filterAvailableCheckbox = document.getElementById('filter-available');
+        // Prefixes de CEPs que terão frete grátis
+        const freeShippingCEPPrefixes = [
+            '034', // Exemplo: CEPs que começam com 034
+            '035', // Exemplo: CEPs que começam com 035
+            '036', // Exemplo: CEPs que começam com 036
+            // Adicione mais prefixos aqui conforme necessário
+        ];
 
 
-        // Função para formatar o preço em BRL
-        const formatPrice = (price) => {
-            return price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        };
+        // Elementos DOM
+        const productListDiv = document.getElementById('product-list');
+        const cartItemsDiv = document.getElementById('cart-items');
+        const cartTotalSpan = document.getElementById('cart-total');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const generateOrderBtn = document.getElementById('generate-order-btn');
+        const orderModal = document.getElementById('order-modal');
+        const orderSummaryTextarea = document.getElementById('order-summary-text');
+        const sendWhatsappBtn = document.getElementById('send-whatsapp-btn');
+        const whatsappMessage = document.getElementById('whatsapp-message');
 
-        // Função para renderizar os produtos na página
-        function renderProducts(productsToRender) { // Agora recebe a lista de produtos a renderizar
-            productListDiv.innerHTML = ''; // Limpa a lista existente
-            productsToRender.forEach(product => { // Usa productsToRender
-                const productCard = document.createElement('div');
-                productCard.className = 'product-card bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center border border-gray-200 hover:border-pink-400';
-                
-                let buttonHtml = '';
-                // Lógica para exibir o botão ou "Indisponível"
-                if (product.available) {
-                    buttonHtml = `
-                        <button class="add-to-cart-btn bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-opacity-50" data-id="${product.id}">
-                            Adicionar ao Carrinho
-                        </button>
-                    `;
-                } else {
-                    buttonHtml = `
-                        <span class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-full cursor-not-allowed">
-                            Indisponível
-                        </span>
-                    `;
-                }
-                function formatPrice(price) {
-                  return `R$ ${price.toFixed(2).replace('.', ',')}`;
-                }
+        const floatingCartBtn = document.getElementById('floating-cart-btn');
+        const floatingCartCount = document.getElementById('floating-cart-count');
+        const cartAside = document.getElementById('cart-aside');
+        const closeCartBtn = document.getElementById('close-cart-btn');
+        const cartBackdrop = document.getElementById('cart-backdrop');
+
+        // Referências para os novos campos de input
+        const cepInput = document.getElementById('cep');
+        const freteInfo = document.getElementById('frete-info');
+        const previsaoEntrega = document.getElementById('previsao-entrega');
+        const formaPagamentoSelect = document.getElementById('forma-pagamento');
+
+        // Referências para os novos controles de filtro e ordenação
+        const sortBySelect = document.getElementById('sort-by');
+        const filterAvailableCheckbox = document.getElementById('filter-available');
 
 
-                let priceHtml = '';
+        // Função para formatar o preço em BRL
+        const formatPrice = (price) => {
+            return price.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        };
 
-                // Verifica se existe um percentual de desconto válido
-                if (product.promoPercent !== undefined && product.promoPercent > 0) {
-                    const desconto = product.price * (product.promoPercent / 100);
-                    const precoPromocional = product.price - desconto;
+        // Função para renderizar os produtos na página
+        function renderProducts(productsToRender) { // Agora recebe a lista de produtos a renderizar
+            productListDiv.innerHTML = ''; // Limpa a lista existente
+            productsToRender.forEach(product => { // Usa productsToRender
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card bg-white rounded-lg shadow-md p-4 flex flex-col items-center text-center border border-gray-200 hover:border-pink-400';
+                
+                let buttonHtml = '';
+                // Lógica para exibir o botão ou "Indisponível"
+                if (product.available) {
+                    buttonHtml = `
+                        <button class="add-to-cart-btn bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-opacity-50" data-id="${product.id}">
+                            Adicionar ao Carrinho
+                        </button>
+                    `;
+                } else {
+                    buttonHtml = `
+                        <span class="bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded-full cursor-not-allowed">
+                            Indisponível
+                        </span>
+                    `;
+                }
 
-                priceHtml = `
-                    <p class="text-xl font-bold text-purple-600 mb-4">
-                        <s class="text-gray-500 text-sm mr-2">${formatPrice(product.price)}</s>
-                        ${formatPrice(precoPromocional)}
-                    </p>
-                        `;
-                        } else {
-                            priceHtml = `
-                                <p class="text-xl font-bold text-purple-600 mb-4">${formatPrice(product.price)}</p>
-                            `;
-                        }
+                let priceHtml = '';
+                // Lógica para exibir preço promocional ou normal
+                if (product.promoPercent !== undefined && product.promoPercent > 0) {
+                    const precoPromocional = product.price * (1 - product.promoPercent / 100);
+                    priceHtml = `
+                        <p class="text-xl font-bold text-purple-600 mb-4">
+                            <s class="text-gray-500 text-sm mr-2">${formatPrice(product.price)}</s>
+                            ${formatPrice(precoPromocional)}
+                        </p>
+                    `;
+                } else {
+                    priceHtml = `
+                        <p class="text-xl font-bold text-purple-600 mb-4">${formatPrice(product.price)}</p>
+                    `;
+                }
+                
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="w-32 h-32 object-cover rounded-full mb-4 border-2 border-pink-300">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">${product.name}</h3>
+                    ${priceHtml}
+                    ${buttonHtml}
+                `;
+                productListDiv.appendChild(productCard);
+            });
+            
+            // Adiciona event listeners aos botões "Adicionar ao Carrinho"
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const productId = parseInt(event.target.dataset.id);
+                    addToCart(productId);
+                });
+            });
+        }
+        
+        // Função para adicionar um produto ao carrinho
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product && product.available) {
+                // Calcula o preço promocional se houver um desconto
+                const priceToUse = product.promoPercent !== undefined && product.promoPercent > 0 ? product.price * (1 - product.promoPercent / 100) : product.price;
 
-                productCard.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}" class="w-32 h-32 object-cover rounded-full mb-4 border-2 border-pink-300">
-                    <h3 class="text-lg font-semibold text-gray-800 mb-2">${product.name}</h3>
-                    ${priceHtml}
-                    ${buttonHtml}
-                `;
-                productListDiv.appendChild(productCard);
-            });
+                if (cart[productId]) {
+                    cart[productId].quantity++;
+                } else {
+                    cart[productId] = { ...product, price: priceToUse, quantity: 1 };
+                }
+                updateCartDisplay();
+            } else if (product && !product.available) {
+                console.log(`Tentativa de adicionar produto indisponível: ${product.name}`);
+            }
+        }
+        
+        // Função para remover um produto do carrinho
+        function removeFromCart(productId) {
+            if (cart[productId]) {
+                cart[productId].quantity--;
+                if (cart[productId].quantity <= 0) {
+                    delete cart[productId];
+                }
+                updateCartDisplay();
+            }
+        }
 
-            // Adiciona event listeners aos botões "Adicionar ao Carrinho"
-            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const productId = parseInt(event.target.dataset.id);
-                    addToCart(productId);
-                });
-            });
-        }
+        // Função para calcular o frete e previsão de entrega
+        function calculateShipping() {
+            const cepValue = cepInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+            
+            let isFreeShipping = false;
+            if (cepValue.length >= 3) { // Verifica se tem pelo menos 3 dígitos para comparar prefixos
+                for (const prefix of freeShippingCEPPrefixes) {
+                    if (cepValue.startsWith(prefix)) {
+                        isFreeShipping = true;
+                        break;
+                    }
+                }
+            }
 
-        // Função para adicionar um produto ao carrinho
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            if (product && product.available) { // Verifica se o produto está disponível
-                // Decide qual preço usar (promocional ou normal)
-                const priceToUse = product.promoPrice !== undefined && product.promoPrice < product.price ? product.promoPrice : product.price;
-
-                if (cart[productId]) {
-                    cart[productId].quantity++;
-                } else {
-                    // Adiciona o produto ao carrinho com o preço correto (promocional se aplicável)
-                    cart[productId] = { ...product, price: priceToUse, quantity: 1 };
-                }
-                updateCartDisplay();
-            } else if (product && !product.available) {
-                console.log(`Tentativa de adicionar produto indisponível: ${product.name}`);
-            }
-        }
-
-        // Função para remover um produto do carrinho
-        function removeFromCart(productId) {
-            if (cart[productId]) {
-                cart[productId].quantity--;
-                if (cart[productId].quantity <= 0) {
-                    delete cart[productId];
-                }
-                updateCartDisplay();
-            }
-        }
-
-        // Função para calcular o frete e previsão de entrega
-        function calculateShipping() {
-            const cepValue = cepInput.value.replace(/\D/g, ''); // Remove caracteres não numéricos
-            
-            let isFreeShipping = false;
-            if (cepValue.length >= 3) { // Verifica se tem pelo menos 3 dígitos para comparar prefixos
-                for (const prefix of freeShippingCEPPrefixes) {
-                    if (cepValue.startsWith(prefix)) {
-                        isFreeShipping = true;
-                        break;
-                    }
-                }
-            }
-
-            if (cepValue.length === 8) { // Só calcula frete e previsão se o CEP estiver completo
-                if (isFreeShipping) {
-                    shippingCost = 0;
-                    deliveryEstimate = "1-2 dias úteis";
-                    freteInfo.textContent = "Frete: GRÁTIS, realizado à partir das 18:00";
-                    freteInfo.classList.remove('text-red-500');
-                    freteInfo.classList.add('text-green-600');
-                } else {
-                    shippingCost = 5.90;
-                    deliveryEstimate = "1-3 dias úteis";
-                    freteInfo.textContent = `Frete: ${formatPrice(shippingCost)}`;
-                    freteInfo.classList.remove('text-green-600');
-                    freteInfo.classList.add('text-red-500');
-                }
-                previsaoEntrega.textContent = `Previsão de entrega: ${deliveryEstimate}`;
-            } else {
-                shippingCost = 0; // Ou um valor padrão se o CEP for inválido/incompleto
-                deliveryEstimate = "";
-                freteInfo.textContent = "Digite um CEP válido para calcular o frete.";
-                freteInfo.classList.remove('text-green-600', 'text-red-500');
-                previsaoEntrega.textContent = "";
-            }
-            updateCartDisplay(); // Atualiza o total com o novo frete
-        }
-
-
-        // Função para atualizar a exibição do carrinho
-        function updateCartDisplay() {
-            cartItemsDiv.innerHTML = ''; // Limpa os itens existentes
-            let subtotal = 0; // Usar subtotal antes do frete
-            let totalItemsInCart = 0;
-            const cartItemCount = Object.keys(cart).length;
-
-            if (cartItemCount === 0) {
-                emptyCartMessage.classList.remove('hidden');
-                if (floatingCartCount) floatingCartCount.classList.add('hidden');
-            } else {
-                emptyCartMessage.classList.add('hidden');
-                if (floatingCartCount) floatingCartCount.classList.remove('hidden');
-            }
-
-            for (const productId in cart) {
-                const item = cart[productId];
-                // Usa o preço que já foi definido no item do carrinho (que pode ser o promocional)
-                subtotal += item.price * item.quantity; 
-                totalItemsInCart += item.quantity;
-
-                const cartItemDiv = document.createElement('div');
-                cartItemDiv.className = 'flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-200';
-                cartItemDiv.innerHTML = `
-                    <div class="flex-1">
-                        <p class="font-medium text-gray-800">${item.name}</p>
-                        <p class="text-sm text-gray-600">${formatPrice(item.price)} x ${item.quantity}</p>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <button class="remove-item-btn bg-red-400 hover:bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center transition duration-300" data-id="${item.id}">-</button>
-                        <span class="font-bold text-gray-800">${item.quantity}</span>
-                        <button class="add-item-btn bg-green-400 hover:bg-green-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center transition duration-300" data-id="${item.id}">+</button>
-                    </div>
-                `;
-                cartItemsDiv.appendChild(cartItemDiv);
-            }
-
-            // O total agora inclui o frete
-            cartTotalSpan.textContent = formatPrice(subtotal + shippingCost);
-            if (floatingCartCount) floatingCartCount.textContent = totalItemsInCart;
-
-            // Adiciona event listeners aos botões de +/- no carrinho
-            document.querySelectorAll('.remove-item-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const productId = parseInt(event.target.dataset.id);
-                    removeFromCart(productId);
-                });
-            });
-            document.querySelectorAll('.add-item-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const productId = parseInt(event.target.dataset.id);
-                    addToCart(productId);
-                });
-            });
-        }
-
-        // Função para gerar o resumo do pedido
-        function generateOrderSummary() {
-            let summary = `Olá! Gostaria de fazer o seguinte pedido:\n\n`;
-            let subtotal = 0;
-            let totalComFrete = 0;
+            if (cepValue.length === 8) { // Só calcula frete e previsão se o CEP estiver completo
+                if (isFreeShipping) {
+                    shippingCost = 0;
+                    deliveryEstimate = "1-2 dias úteis";
+                    freteInfo.textContent = "Frete: GRÁTIS, realizado à partir das 18:00";
+                    freteInfo.classList.remove('text-red-500');
+                    freteInfo.classList.add('text-green-600');
+                } else {
+                    shippingCost = 5.90;
+                    deliveryEstimate = "1-3 dias úteis";
+                    freteInfo.textContent = `Frete: ${formatPrice(shippingCost)}`;
+                    freteInfo.classList.remove('text-green-600');
+                    freteInfo.classList.add('text-red-500');
+                }
+                previsaoEntrega.textContent = `Previsão de entrega: ${deliveryEstimate}`;
+            } else {
+                shippingCost = 0; // Ou um valor padrão se o CEP for inválido/incompleto
+                deliveryEstimate = "";
+                freteInfo.textContent = "Digite um CEP válido para calcular o frete.";
+                freteInfo.classList.remove('text-green-600', 'text-red-500');
+                previsaoEntrega.textContent = "";
+            }
+            updateCartDisplay(); // Atualiza o total com o novo frete
+        }
 
 
-            // Captura os valores dos novos campos
-            const cep = cepInput.value.trim(); // Captura o CEP
-            const formaPagamento = formaPagamentoSelect.value;
+        // Função para atualizar a exibição do carrinho
+        function updateCartDisplay() {
+            cartItemsDiv.innerHTML = ''; // Limpa os itens existentes
+            let subtotal = 0; // Usar subtotal antes do frete
+            let totalItemsInCart = 0;
+            const cartItemCount = Object.keys(cart).length;
 
-            // Validação dos campos obrigatórios
-            if (Object.keys(cart).length === 0) {
-                summary = "Seu carrinho está vazio. Por favor, adicione produtos antes de gerar o pedido.";
-                sendWhatsappBtn.disabled = true;
-                sendWhatsappBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            } else if (!cep || !formaPagamento || shippingCost === null) { // Validação ajustada
-                summary = "Por favor, preencha o CEP e selecione a Forma de Pagamento para finalizar o pedido.";
-                sendWhatsappBtn.disabled = true;
-                sendWhatsappBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            }
-            else {
-                sendWhatsappBtn.disabled = false;
-                sendWhatsappBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            if (cartItemCount === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                if (floatingCartCount) floatingCartCount.classList.add('hidden');
+            } else {
+                emptyCartMessage.classList.add('hidden');
+                if (floatingCartCount) floatingCartCount.classList.remove('hidden');
+            }
 
-                for (const productId in cart) {
-                    const item = cart[productId];
-                    // Usa o preço que já foi definido no item do carrinho (que pode ser o promocional)
-                    summary += `- ${item.name} (x${item.quantity}) - ${formatPrice(item.price * item.quantity)}\n`;
-                    subtotal += item.price * item.quantity;
-                }
-                
-                totalComFrete = subtotal + shippingCost; // Calcula o total com frete
+            for (const productId in cart) {
+                const item = cart[productId];
+                // Usa o preço que já foi definido no item do carrinho (que pode ser o promocional)
+                subtotal += item.price * item.quantity;
+                totalItemsInCart += item.quantity;
 
-                summary += `\nSubtotal: ${formatPrice(subtotal)}\n`;
-                summary += `Frete: ${shippingCost === 0 ? 'GRÁTIS, realizado à partir das 18:00' : formatPrice(shippingCost)}\n`;
-                summary += `Total: ${formatPrice(totalComFrete)}\n\n`;
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.className = 'flex justify-between items-center bg-gray-50 p-3 rounded-lg border border-gray-200';
+                cartItemDiv.innerHTML = `
+                    <div class="flex-1">
+                        <p class="font-medium text-gray-800">${item.name}</p>
+                        <p class="text-sm text-gray-600">${formatPrice(item.price)} x ${item.quantity}</p>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="remove-item-btn bg-red-400 hover:bg-red-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center transition duration-300" data-id="${item.id}">-</button>
+                        <span class="font-bold text-gray-800">${item.quantity}</span>
+                        <button class="add-item-btn bg-green-400 hover:bg-green-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center transition duration-300" data-id="${item.id}">+</button>
+                    </div>
+                `;
+                cartItemsDiv.appendChild(cartItemDiv);
+            }
 
-                // Adiciona as informações de endereço e pagamento ao resumo
-                summary += `--- Detalhes da Entrega e Pagamento ---\n`;
-                summary += `CEP: ${cep}\n`; // Inclui o CEP no resumo
-                summary += `Previsão de Entrega: ${deliveryEstimate}\n`; // Inclui a previsão de entrega
-                summary += `Forma de Pagamento: ${formaPagamento}\n\n`;
-                summary += `Aguardamos seu contato para finalizar a compra!`;
-            }
-            orderSummaryTextarea.value = summary;
-            openModal();
-            closeMobileCart(); // Fecha o carrinho mobile se estiver aberto
-        }
+            // O total agora inclui o frete
+            cartTotalSpan.textContent = formatPrice(subtotal + shippingCost);
+            if (floatingCartCount) floatingCartCount.textContent = totalItemsInCart;
 
-        // Funções para o modal de pedido
-        function openModal() {
-            orderModal.style.display = 'flex';
-            whatsappMessage.classList.add('hidden');
-        }
+            // Adiciona event listeners aos botões de +/- no carrinho
+            document.querySelectorAll('.remove-item-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const productId = parseInt(event.target.dataset.id);
+                    removeFromCart(productId);
+                });
+            });
+            document.querySelectorAll('.add-item-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const productId = parseInt(event.target.dataset.id);
+                    addToCart(productId);
+                });
+            });
+        }
 
-        function closeModal() {
-            orderModal.style.display = 'none';
-        }
-
-        // Funções para o carrinho móvel (overlay)
-        function openMobileCart() {
-            if (cartAside) {
-                cartAside.classList.remove('hidden');
-                cartAside.classList.add('is-open');
-            }
-            if (cartBackdrop) {
-                cartBackdrop.classList.remove('hidden');
-            }
-        }
-
-        function closeMobileCart() {
-            if (cartAside) {
-                cartAside.classList.remove('is-open');
-                setTimeout(() => {
-                    cartAside.classList.add('hidden');
-                }, 300);
-            }
-            if (cartBackdrop) {
-                cartBackdrop.classList.add('hidden');
-            }
-        }
+        // Função para gerar o resumo do pedido
+        function generateOrderSummary() {
+            let summary = `Olá! Gostaria de fazer o seguinte pedido:\n\n`;
+            let subtotal = 0;
+            let totalComFrete = 0;
 
 
-        // Event listener para o botão "Gerar Pedido"
-        generateOrderBtn.addEventListener('click', generateOrderSummary);
+            // Captura os valores dos novos campos
+            const cep = cepInput.value.trim(); // Captura o CEP
+            const formaPagamento = formaPagamentoSelect.value;
 
-        // Event listener para o botão "Enviar Pedido via WhatsApp"
-        sendWhatsappBtn.addEventListener('click', () => {
-            const orderText = orderSummaryTextarea.value;
-            const encodedOrderText = encodeURIComponent(orderText);
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedOrderText}`;
+            // Validação dos campos obrigatórios
+            if (Object.keys(cart).length === 0) {
+                summary = "Seu carrinho está vazio. Por favor, adicione produtos antes de gerar o pedido.";
+                sendWhatsappBtn.disabled = true;
+                sendWhatsappBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else if (!cep || !formaPagamento || shippingCost === null) { // Validação ajustada
+                summary = "Por favor, preencha o CEP e selecione a Forma de Pagamento para finalizar o pedido.";
+                sendWhatsappBtn.disabled = true;
+                sendWhatsappBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+            else {
+                sendWhatsappBtn.disabled = false;
+                sendWhatsappBtn.classList.remove('opacity-50', 'cursor-not-allowed');
 
-            window.open(whatsappUrl, '_blank');
-            closeModal();
-        });
+                for (const productId in cart) {
+                    const item = cart[productId];
+                    // Usa o preço que já foi definido no item do carrinho (que pode ser o promocional)
+                    summary += `- ${item.name} (x${item.quantity}) - ${formatPrice(item.price * item.quantity)}\n`;
+                    subtotal += item.price * item.quantity;
+                }
+                
+                totalComFrete = subtotal + shippingCost; // Calcula o total com frete
 
-        // Fecha o modal de pedido se clicar fora dele
-        window.addEventListener('click', (event) => {
-            if (event.target === orderModal) {
-                closeModal();
-            }
-            if (event.target === cartBackdrop) {
-                closeMobileCart();
-            }
-        });
+                summary += `\nSubtotal: ${formatPrice(subtotal)}\n`;
+                summary += `Frete: ${shippingCost === 0 ? 'GRÁTIS, realizado à partir das 18:00' : formatPrice(shippingCost)}\n`;
+                summary += `Total: ${formatPrice(totalComFrete)}\n\n`;
 
-        // Event listener para o campo de CEP para calcular o frete dinamicamente
-        cepInput.addEventListener('input', calculateShipping);
+                // Adiciona as informações de endereço e pagamento ao resumo
+                summary += `--- Detalhes da Entrega e Pagamento ---\n`;
+                summary += `CEP: ${cep}\n`; // Inclui o CEP no resumo
+                summary += `Previsão de Entrega: ${deliveryEstimate}\n`; // Inclui a previsão de entrega
+                summary += `Forma de Pagamento: ${formaPagamento}\n\n`;
+                summary += `Aguardamos seu contato para finalizar a compra!`;
+            }
+            orderSummaryTextarea.value = summary;
+            openModal();
+            closeMobileCart(); // Fecha o carrinho mobile se estiver aberto
+        }
+
+        // Funções para o modal de pedido
+        function openModal() {
+            orderModal.style.display = 'flex';
+            whatsappMessage.classList.add('hidden');
+        }
+
+        function closeModal() {
+            orderModal.style.display = 'none';
+        }
+
+        // Funções para o carrinho móvel (overlay)
+        function openMobileCart() {
+            if (cartAside) {
+                cartAside.classList.remove('hidden');
+                cartAside.classList.add('is-open');
+            }
+            if (cartBackdrop) {
+                cartBackdrop.classList.remove('hidden');
+            }
+        }
+
+        function closeMobileCart() {
+            if (cartAside) {
+                cartAside.classList.remove('is-open');
+                setTimeout(() => {
+                    cartAside.classList.add('hidden');
+                }, 300);
+            }
+            if (cartBackdrop) {
+                cartBackdrop.classList.add('hidden');
+            }
+        }
 
 
-        // Inicializa a aplicação
-        document.addEventListener('DOMContentLoaded', () => {
-            // Chama a função para aplicar filtros e ordenação na carga inicial
-            applyFiltersAndSorting(); 
-            calculateShipping(); // Calcula o frete inicial ao carregar a página
-            updateCartDisplay(); // Atualiza a exibição do carrinho
-            
-            // Event listeners para os controles de filtro e ordenação
-            sortBySelect.addEventListener('change', applyFiltersAndSorting);
-            filterAvailableCheckbox.addEventListener('change', applyFiltersAndSorting);
+        // Event listener para o botão "Gerar Pedido"
+        generateOrderBtn.addEventListener('click', generateOrderSummary);
 
-            // Debugging floating cart button (mantido para caso de problemas futuros)
-            if (floatingCartBtn) {
-                floatingCartBtn.addEventListener('click', openMobileCart);
-            }
-            if (closeCartBtn) {
-                closeCartBtn.addEventListener('click', closeMobileCart);
-            }
-        });
+        // Event listener para o botão "Enviar Pedido via WhatsApp"
+        sendWhatsappBtn.addEventListener('click', () => {
+            const orderText = orderSummaryTextarea.value;
+            const encodedOrderText = encodeURIComponent(orderText);
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedOrderText}`;
 
-        // NOVA FUNÇÃO: Aplica filtros e ordenação e renderiza os produtos
-        function applyFiltersAndSorting() {
-            let filteredProducts = [...products]; // Cria uma cópia para não modificar o array original
+            window.open(whatsappUrl, '_blank');
+            closeModal();
+        });
 
-            // 1. Filtragem por disponibilidade
-            if (filterAvailableCheckbox.checked) {
-                filteredProducts = filteredProducts.filter(product => product.available);
-            }
+        // Fecha o modal de pedido se clicar fora dele
+        window.addEventListener('click', (event) => {
+            if (event.target === orderModal) {
+                closeModal();
+            }
+            if (event.target === cartBackdrop) {
+                closeMobileCart();
+            }
+        });
 
-            // 2. Ordenação
-            const sortBy = sortBySelect.value;
+        // Event listener para o campo de CEP para calcular o frete dinamicamente
+        cepInput.addEventListener('input', calculateShipping);
 
-            filteredProducts.sort((a, b) => {
-                if (sortBy === 'price-asc') {
-                    const priceA = a.promoPrice !== undefined && a.promoPrice < a.price ? a.promoPrice : a.price;
-                    const priceB = b.promoPrice !== undefined && b.promoPrice < b.price ? b.promoPrice : b.price;
-                    return priceA - priceB;
-                } else if (sortBy === 'price-desc') {
-                    const priceA = a.promoPrice !== undefined && a.promoPrice < a.price ? a.promoPrice : a.price;
-                    const priceB = b.promoPrice !== undefined && b.promoPrice < b.price ? b.promoPrice : b.price;
-                    return priceB - priceA;
-                } else if (sortBy === 'launch-desc') {
-                    // Converte as datas para objetos Date para comparação
-                    const dateA = new Date(a.launchDate);
-                    const dateB = new Date(b.launchDate);
-                    return dateB - dateA; // Mais recente primeiro
-                }
-                // 'relevance' (padrão) não precisa de ordenação explícita, mantém a ordem original
-                return 0; 
-            });
 
-            renderProducts(filteredProducts); // Renderiza a lista filtrada e ordenada
-        }
-    </script>
+        // Inicializa a aplicação
+        document.addEventListener('DOMContentLoaded', () => {
+            // Chama a função para aplicar filtros e ordenação na carga inicial
+            applyFiltersAndSorting(); 
+            calculateShipping(); // Calcula o frete inicial ao carregar a página
+            updateCartDisplay(); // Atualiza a exibição do carrinho
+            
+            // Event listeners para os controles de filtro e ordenação
+            sortBySelect.addEventListener('change', applyFiltersAndSorting);
+            filterAvailableCheckbox.addEventListener('change', applyFiltersAndSorting);
+
+            // Debugging floating cart button (mantido para caso de problemas futuros)
+            if (floatingCartBtn) {
+                floatingCartBtn.addEventListener('click', openMobileCart);
+            }
+            if (closeCartBtn) {
+                closeCartBtn.addEventListener('click', closeMobileCart);
+            }
+        });
+
+        // NOVA FUNÇÃO: Aplica filtros e ordenação e renderiza os produtos
+        function applyFiltersAndSorting() {
+            let filteredProducts = [...products]; // Cria uma cópia para não modificar o array original
+
+            // 1. Filtragem por disponibilidade
+            if (filterAvailableCheckbox.checked) {
+                filteredProducts = filteredProducts.filter(product => product.available);
+            }
+
+            // 2. Ordenação
+            const sortBy = sortBySelect.value;
+
+            filteredProducts.sort((a, b) => {
+                if (sortBy === 'price-asc') {
+                    const priceA = a.promoPrice !== undefined && a.promoPrice < a.price ? a.promoPrice : a.price;
+                    const priceB = b.promoPrice !== undefined && b.promoPrice < b.price ? b.promoPrice : b.price;
+                    return priceA - priceB;
+                } else if (sortBy === 'price-desc') {
+                    const priceA = a.promoPrice !== undefined && a.promoPrice < a.price ? a.promoPrice : a.price;
+                    const priceB = b.promoPrice !== undefined && b.promoPrice < b.price ? b.promoPrice : b.price;
+                    return priceB - priceA;
+                } else if (sortBy === 'launch-desc') {
+                    // Converte as datas para objetos Date para comparação
+                    const dateA = new Date(a.launchDate);
+                    const dateB = new Date(b.launchDate);
+                    return dateB - dateA; // Mais recente primeiro
+                }
+                // 'relevance' (padrão) não precisa de ordenação explícita, mantém a ordem original
+                return 0; 
+            });
+
+            renderProducts(filteredProducts); // Renderiza a lista filtrada e ordenada
+        }
+    </script>
 </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</ht
