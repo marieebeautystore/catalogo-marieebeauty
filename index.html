@@ -178,7 +178,7 @@
             { id: 4, name: "Serum Vitamina C", price: 10, image: "./imagens/serum_vit_c.png", available: true, launchDate: "2024-05-10", promoPercent: 20 },
             { id: 5, name: "Serum Anti-Oleosidade", price: 10, image: "./imagens/serum_anti_oleosidade.png", available: true, launchDate: "2024-06-01", promoPercent: 20 },
             { id: 6, name: "Sérum Rosa Mosqueta", price: 10, image: "./imagens/serum_rosa_mosqueta.png", available: true, launchDate: "2024-07-05", promoPercent: 20 },
-            { id: 7, name: "Suporte p Pincel", price: 10, image: "./imagens/suporte_pincel.png", available: false, launchDate: "2024-04-20", promoPercent: 20 },
+            { id: 7, name: "Suporte p Pincel", price: 10, image: "./imagens/suporte_pincel.png", available: true, launchDate: "2024-04-20", promoPercent: 20 },
             { id: 8, name: "Pincel p Sobrancelha", price: 6, image: "./imagens/pincel_sobrancelha.png", available: true, launchDate: "2024-07-10", promoPercent: 20 },
             { id: 9, name: "Blush Bastão sarah beauty", price: 20, image: "./imagens/blush_bastao_sarah_beauty.png", available: true, launchDate: "2024-03-01", promoPercent: 20 },
             { id: 10, name: "Espelho p Bolsa", price: 15, image: "./imagens/espelho_bolsa.png", available: true, launchDate: "2024-07-18", promoPercent: 20 },
@@ -303,25 +303,29 @@
                         </span>
                     `;
                 }
+                function formatPrice(price) {
+                  return `R$ ${price.toFixed(2).replace('.', ',')}`;
+                }
+
 
                 let priceHtml = '';
 
-// Verifica se existe um percentual de desconto válido
-if (product.promoPercent !== undefined && product.promoPercent > 0) {
-    const desconto = product.price * (product.promoPercent / 100);
-    const precoPromocional = product.price - desconto;
+                // Verifica se existe um percentual de desconto válido
+                if (product.promoPercent !== undefined && product.promoPercent > 0) {
+                    const desconto = product.price * (product.promoPercent / 100);
+                    const precoPromocional = product.price - desconto;
 
-    priceHtml = `
-        <p class="text-xl font-bold text-purple-600 mb-4">
-            <s class="text-gray-500 text-sm mr-2">${formatPrice(product.price)}</s>
-            ${formatPrice(precoPromocional)}
-        </p>
-    `;
-} else {
-    priceHtml = `
-        <p class="text-xl font-bold text-purple-600 mb-4">${formatPrice(product.price)}</p>
-    `;
-}
+                priceHtml = `
+                    <p class="text-xl font-bold text-purple-600 mb-4">
+                        <s class="text-gray-500 text-sm mr-2">${formatPrice(product.price)}</s>
+                        ${formatPrice(precoPromocional)}
+                    </p>
+                        `;
+                        } else {
+                            priceHtml = `
+                                <p class="text-xl font-bold text-purple-600 mb-4">${formatPrice(product.price)}</p>
+                            `;
+                        }
 
                 productCard.innerHTML = `
                     <img src="${product.image}" alt="${product.name}" class="w-32 h-32 object-cover rounded-full mb-4 border-2 border-pink-300">
@@ -634,6 +638,7 @@ if (product.promoPercent !== undefined && product.promoPercent > 0) {
     </script>
 </body>
 </html>
+
 
 
 
